@@ -4,12 +4,6 @@ import EmployeeService from "../Services/Employee.service.js";
 
 
 
-// export class  Employeecontroller {
-
-
-//     constructor() {
-        // this.employeeService = new EmployeeService();
-//       }
 
     
     const employeeService = new EmployeeService();
@@ -32,49 +26,6 @@ import EmployeeService from "../Services/Employee.service.js";
     
 
 
-// export const getEmployees = async(req, res)=>{
-//     try{
-//         const response = await User.findAll();
-//         res.status(200).json(response);
-//     } catch (error) {
-//         console.log(error.message);
-//     }
-// }
-
-// export const searchEmployees = async(req, res)=>{
-//     const { query } = req.query;
-  
-//     try {
-//       const response = await User.findAll({
-//         where: {
-//           [Op.or]: [
-//             { name: { [Op.like]: `%${query}%` } },
-//             { license_no: { [Op.like]: `%${query}%` } },
-//             { age: { [Op.like]: `%${query}%` } },
-//             { salary: { [Op.like]: `%${query}%` } },
-//           ],
-//         },
-//       });
-//       res.status(200).json(response);
-//     } catch (error) {
-//        console.log(error.message);
-//     }
-//   };
-
-
-// export const getEmployeeById = async(req, res)=>{
-//     try{
-//         const response = await User.findOne({
-//             where:{
-                
-//                  id: req.params.id
-//             }
-//         });
-//         res.status(200).json(response);
-//     } catch (error) {
-//         console.log(error.message);
-//     }
-// }
 
 
 export async function  searchEmployees(req,res) {
@@ -102,14 +53,7 @@ export async function getEmployeeById(req,res) {
     }
   }
 
-// export const createEmployee = async(req, res)=>{
-//     try{
-//         await User.create(req.body);
-//         res.status(201).json({msg: "Employee Created Successfully"});
-//     } catch (error) {
-//         console.log(error.message);
-//     }
-// }
+
 
 
 export async function Employees(req,res) {
@@ -140,18 +84,6 @@ export async function createEmployee(req,res) {
   }
 
 
-// export const updateEmployee = async(req, res)=>{
-//     try{
-//         await User.update(req.body,{
-//             where:{
-//                 id: req.params.id
-//             }
-//         });
-//         res.status(200).json({msg: "Employee Updated Successfully"});
-//     } catch (error) {
-//         console.log(error.message);
-//     }
-// }
 
 
 export async function updateEmployee(req,res) {
@@ -167,18 +99,6 @@ export async function updateEmployee(req,res) {
   }
 }
 
-// export const deleteEmployee = async(req, res)=>{
-//     try{
-//         await User.destroy({
-//             where:{
-//                 id: req.params.id
-//             }
-//         });
-//         res.status(200).json({msg: "Employee Deleted Successfully"});
-//     } catch (error) {
-//         console.log(error.message);
-//     }
-// }
 
 
 export async function deleteEmployee(req,res) {
