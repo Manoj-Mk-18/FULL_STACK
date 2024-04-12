@@ -29,9 +29,25 @@ const EditEmployee = () => {
   
            });
            navigate("/");
-       } catch (error){
-          console.log(error);
-       }
+           Swal.fire({
+            icon: 'success',
+            title: 'Employee Updated!',
+            text: 'New employee has been successfully Updated...',
+          }).then(() => {
+            clearupdateEmployeeInput();
+            handleCloseAddEmployeeModal();
+    
+            getEmployees();
+          });
+    
+        } catch (error) {
+          console.error('Error creating employee:', error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: 'An error occurred while creating employee. Please try again.',
+          });
+        }
     };
 
     const getEmployeeById = async (id) => {

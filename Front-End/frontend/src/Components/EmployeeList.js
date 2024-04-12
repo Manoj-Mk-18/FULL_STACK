@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import ReactPaginate from "react-paginate";
+import Swal from 'sweetalert2';
 import Papa from 'papaparse';
 
 
@@ -94,11 +95,24 @@ const EmployeeList = () => {
         age,
         salary
       });
-      handleCloseAddEmployeeModal();
-    
-      getEmployees(); 
+      Swal.fire({
+        icon: 'success',
+        title: 'Employee Added!',
+        text: 'New employee has been successfully created.',
+      }).then(() => {
+        clearAddEmployeeInput();
+        handleCloseAddEmployeeModal();
+
+        getEmployees();
+      });
+
     } catch (error) {
-      console.log(error);
+      console.error('Error creating employee:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error!',
+        text: 'An error occurred while creating employee. Please try again.',
+      });
     }
   };
 
@@ -114,12 +128,12 @@ const EmployeeList = () => {
     }));
     const csvContent = Papa.unparse(employeeData); 
 
-    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8" }); // Create blob
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8" }); 
     const url = window.URL.createObjectURL(blob); 
 
     const link = document.createElement("a");
     link.href = url;
-    link.setAttribute("download", `employees.${downloadFormat}`); 
+    link.setAttribute("download", `employees.csv`); 
 
     document.body.appendChild(link); 
     link.click(); 
@@ -284,14 +298,14 @@ const EmployeeList = () => {
   </div>
 </div>
 <div className="mb-4 mt-4">
-      <button onClick={handleDownload}  className="btn btn-primary">Download as {downloadFormat}</button>
-      <input
+      <button onClick={handleDownload}  className="btn btn-primary" value={csv} onChange={(e) => setDownloadFormat(e.target.value)}>Download as csv</button>
+      {/* <input
         id="csvFormat"
         name="downloadFormat"
         value="csv"
         checked={downloadFormat === "csv"}
         onChange={(e) => setDownloadFormat(e.target.value)}
-      />
+      /> */}
    </div>
 
         <div className="mb-4 mt-4">
