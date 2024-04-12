@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import Swal from 'sweetalert2';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const EditEmployee = () => {
@@ -28,26 +29,16 @@ const EditEmployee = () => {
              salary
   
            });
-           navigate("/");
            Swal.fire({
             icon: 'success',
             title: 'Employee Updated!',
-            text: 'New employee has been successfully Updated...',
-          }).then(() => {
-            clearupdateEmployeeInput();
-            handleCloseAddEmployeeModal();
-    
-            getEmployees();
-          });
-    
-        } catch (error) {
-          console.error('Error creating employee:', error);
-          Swal.fire({
-            icon: 'error',
-            title: 'Error!',
-            text: 'An error occurred while creating employee. Please try again.',
-          });
-        }
+            // text: 'Employee has been Updated Successfully...',
+            timer: 2000
+          })
+           navigate("/");
+       } catch (error){
+          console.log(error);
+       }
     };
 
     const getEmployeeById = async (id) => {
@@ -67,49 +58,75 @@ const EditEmployee = () => {
    
 
   return (
-    <div className='container mt-5'>
-    <div className='row'>
-    <div className='col-lg-5 ms-5'>
-       
-        <form onSubmit={updateEmployee}>
-          <div className='mb-4'>
-            <label> Name : </label>
-            <input type='text' className='form-control' value={name} onChange={(e)=> setName(e.target.value)}/>
-          </div>
 
-          <div className='mb-4'>
-            <label> License_No : </label>
-            <input type='text' className='form-control' value={license_no} onChange={(e)=> setLicense_no(e.target.value)}/>
-          </div>
+    <div className="container mt-5">
+      <div className="row gx-5 justify-content-center">
+        <div className="col-md-8 col-lg-5">
+          <div className="update-employee-form card shadow-sm p-4">
+            <h4 className="text-center mb-4">Update Employee</h4>
 
-          <div className='mb-4'>
-            <label> Age : </label>
-            <input type='text' className='form-control' value={age} onChange={(e)=> setAge(e.target.value)}/>
-          </div>
+            <form onSubmit={updateEmployee}>
+              <div className="mb-3">
+                <label htmlFor="name" className="form-label">Name:</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                />
+              </div>
 
-          <div className='mb-4'>
-            <label> Salary : </label>
-            <input type='text' className='form-control' value={salary} onChange={(e)=> setSalary(e.target.value)}/>
-          </div>
+              <div className="mb-3">
+                <label htmlFor="license_no" className="form-label">License No:</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="license_no"
+                  value={license_no}
+                  onChange={(e) => setLicense_no(e.target.value)}
+                  required
+                />
+              </div>
 
-          <div className="text-center">
-                      <button class="btn btn-primary" type='submit' onClick={updateEmployee}> Update </button>
-          </div>
+              <div className="mb-3">
+                <label htmlFor="age" className="form-label">Age:</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  id="age"
+                  value={age}
+                  onChange={(e) => setAge(e.target.value)}
+                />
+              </div>
 
-        </form>
+              <div className="mb-3">
+                <label htmlFor="salary" className="form-label">Salary:</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  id="salary"
+                  value={salary}
+                  onChange={(e) => setSalary(e.target.value)}
+                />
+              </div>
+
+              <div className="text-center">
+                <button type="submit" className="btn btn-primary">
+                  Update
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
-    </div>
-    </div>
-      
-
-    
-       
-    
-  
-
-  
-    
   );
-}
+};
+
+  
+    
 
 export default EditEmployee;
+

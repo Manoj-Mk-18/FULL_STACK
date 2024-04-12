@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import Swal from 'sweetalert2';
 import Papa from 'papaparse';
@@ -16,6 +17,7 @@ const EmployeeList = () => {
   const [age, setAge] = useState("");
   const [salary, setSalary] = useState("");
   const [showAddEmployeeModal, setShowAddEmployeeModal] = useState(false);
+  const navigate = useNavigate();
   const [downloadFormat, setDownloadFormat] = useState("csv"); 
  
  
@@ -98,12 +100,17 @@ const EmployeeList = () => {
       Swal.fire({
         icon: 'success',
         title: 'Employee Added!',
-        text: 'New employee has been successfully created.',
+        text: 'New Employee has been Created Successfully...',
       }).then(() => {
-        clearAddEmployeeInput();
-        handleCloseAddEmployeeModal();
 
+        setName('');
+        setLicense_no('');
+        setAge(''); 
+        setSalary('');
+
+        handleCloseAddEmployeeModal();
         getEmployees();
+
       });
 
     } catch (error) {
@@ -111,9 +118,10 @@ const EmployeeList = () => {
       Swal.fire({
         icon: 'error',
         title: 'Error!',
-        text: 'An error occurred while creating employee. Please try again.',
+        text: 'An error occurred while creating employee. Please try again...',
       });
     }
+    navigate("/");
   };
 
 
@@ -133,7 +141,7 @@ const EmployeeList = () => {
 
     const link = document.createElement("a");
     link.href = url;
-    link.setAttribute("download", `employees.csv`); 
+    link.setAttribute("download", `employees.${downloadFormat}`); 
 
     document.body.appendChild(link); 
     link.click(); 
@@ -147,7 +155,7 @@ const EmployeeList = () => {
     <div className="container">
       <div className="mt-4">
       <div className="col-lg-6">
-          <input type="text" id="search" placeholder="Search here..." value={searchTerm} onChange={(e)=>handleInput(e)}/>
+          <input type="text" id="search" placeholder=" Search here..." value={searchTerm} onChange={(e)=>handleInput(e)}/>
         </div>
         <div className="col-lg-6 mt-5 center"> </div>
         <table className="table table-hover table-bordered text-center table-striped mt-3 shadow-lg">
@@ -259,7 +267,7 @@ const EmployeeList = () => {
   <div className="modal-dialog">
     <div className="modal-content">
     <div className="modal-header">
-        <h1 className="modal-title fs-5" id="staticBackdropLabel">Add Employee</h1>
+        <h1 className="modal-title fs-5">Add Employee</h1>
         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div className='body'>
@@ -287,7 +295,7 @@ const EmployeeList = () => {
         <div className="modal-footer">
 
         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button className="btn btn-primary" type='submit' onClick={addEmployee}> Add </button>
+        <button className="btn btn-primary" type='submit' onClick={addEmployee}  data-bs-dismiss="modal" aria-hidden={showAddEmployeeModal}> Add </button>
         
         </div>
         
@@ -298,14 +306,7 @@ const EmployeeList = () => {
   </div>
 </div>
 <div className="mb-4 mt-4">
-      <button onClick={handleDownload}  className="btn btn-primary" value={csv} onChange={(e) => setDownloadFormat(e.target.value)}>Download as csv</button>
-      {/* <input
-        id="csvFormat"
-        name="downloadFormat"
-        value="csv"
-        checked={downloadFormat === "csv"}
-        onChange={(e) => setDownloadFormat(e.target.value)}
-      /> */}
+      <button onClick={handleDownload}  className="btn btn-primary" id="b3" onChange={(e) => setDownloadFormat(e.target.value)}>Download</button>
    </div>
 
         <div className="mb-4 mt-4">

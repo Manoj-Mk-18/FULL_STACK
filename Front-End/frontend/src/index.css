@@ -17,7 +17,23 @@ code {
 }
 
 .form-control{
- 
  height:35px;
- width:455px;
+ width:456px;
+}
+
+#b3{
+  margin-left: 500px;
+  margin-bottom: 5px;
+}
+#name{
+  width: 390px;
+}
+#license_no{
+  width: 390px;
+}
+#age{
+  width: 390px;
+}
+#salary{
+  width: 390px;
 }
