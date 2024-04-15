@@ -13,17 +13,18 @@ code {
 }
 #search{
   margin-top: 15px;
-  padding-right: 190px;
+  padding-right: 90px;
 }
 
 .form-control{
  height:35px;
- width:456px;
+ width:450px;
 }
 
 #b3{
-  margin-left: 500px;
-  margin-bottom: 5px;
+  margin-top: -20px;
+  margin-left: 460px;
+  margin-bottom: 6px;
 }
 #name{
   width: 390px;
@@ -36,4 +37,7 @@ code {
 }
 #salary{
   width: 390px;
+}
+.header{
+  margin-left: 360px;
 }
